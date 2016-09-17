@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_material_light"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/container_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar_home" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvFromStation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnFromStation"
+        android:layout_margin="@dimen/abc_action_bar_overflow_padding_end_material"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:hint="@string/stationFromText"
+        android:padding="5dp"
+        android:text="@string/stationFromText"
+        android:textSize="@dimen/text_size_medium" />
+
+    <Button
+        android:id="@+id/btnFromStation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/abc_action_bar_overflow_padding_end_material"
+        android:layout_above="@+id/spacerOne"
+        android:background="@color/button_material_dark"
+        android:text="@string/stationFromButtonText"
+        android:textAllCaps="false"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/text_size_medium" />
+
+    <Space
+        android:id="@+id/spacerOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvToStation"
+        android:gravity="center"
+        android:hint=""
+        android:padding="2dp"
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/tvToStation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/abc_action_bar_overflow_padding_end_material"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:gravity="center"
+        android:hint="@string/stationToText"
+        android:padding="5dp"
+        android:text="@string/stationToText"
+        android:textSize="@dimen/text_size_medium" />
+
+    <Button
+        android:id="@+id/btnToStation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvToStation"
+        android:layout_margin="@dimen/abc_action_bar_overflow_padding_end_material"
+        android:background="@color/button_material_dark"
+        android:text="@string/stationToButtonText"
+        android:textAllCaps="false"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/text_size_medium" />
+
+    <Space
+        android:id="@+id/spacerTwo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnToStation"
+        android:gravity="center"
+        android:hint=""
+        android:padding="2dp"
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spacerTwo"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_margin="@dimen/abc_action_bar_overflow_padding_end_material"
+        android:gravity="center"
+        android:hint="@string/dateText"
+        android:padding="5dp"
+        android:text="@string/dateText"
+        android:textSize="@dimen/text_size_medium" />
+
+    <Button
+        android:id="@+id/btnDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDate"
+        android:layout_margin="@dimen/abc_action_bar_overflow_padding_end_material"
+        android:background="@color/button_material_dark"
+        android:text="@string/dateButtonText"
+        android:textAllCaps="false"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="@dimen/text_size_medium" />
+
+
+</RelativeLayout>

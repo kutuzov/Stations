@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Stations</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="about">About</string>
+    <string name="stationFromText">Станция отправления:</string>
+    <string name="stationFromButtonText">Выбрать станцию отправления</string>stationFromButtonText
+    <string name="stationToText">Станция прибытия:</string>
+    <string name="stationToButtonText">Выбрать станцию прибытия</string>
+    <string name="dateText">Дата отправления:</string>
+    <string name="dateButtonText">Выбрать дату отправления</string>
+    <string name="dateChangeText">Укажите дату отправления</string>
+    <string name="changeDateButtonText">Сохранить дату отправления</string>
+    <string name="searchHint">Поиск станции...</string>
+
+
+
+
+
+    <!--<string name=""></string>-->
+</resources>
