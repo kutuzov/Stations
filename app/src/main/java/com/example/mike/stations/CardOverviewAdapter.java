@@ -2,6 +2,7 @@ package com.example.mike.stations;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.*;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -62,7 +64,7 @@ public class CardOverviewAdapter extends RecyclerView.Adapter<CardOverviewAdapte
 
 
     @Override
-    public void onBindViewHolder(CardOverviewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(CardOverviewAdapter.ViewHolder holder, final int position) {
         // Get the data model based on position
         Response.Stations card = cards.get(position);
         // Set item views based on the data model
@@ -72,6 +74,20 @@ public class CardOverviewAdapter extends RecyclerView.Adapter<CardOverviewAdapte
         holder.tvDescription.setText(card.stationTitle);
 
         holder.cvCard.setBackgroundColor(Color.LTGRAY);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+            Activity activity = (Activity) context;
+            StationsApplication stApp = (StationsApplication) context.getApplicationContext();
+            String str = stApp.getStDate();
+            stApp.setStation(position);
+            Toast.makeText(v.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
+
+
+
+        }
+        });
     }
 
     // Return the total count of items
@@ -82,12 +98,9 @@ public class CardOverviewAdapter extends RecyclerView.Adapter<CardOverviewAdapte
     }
 
     @Override
-    public void onClick(View v){
+    public void onClick(View v) {
         Activity activity = (Activity) context;
-        Log.i("onClick", "on View: " + v.toString());
-
     }
-
 
     }
 

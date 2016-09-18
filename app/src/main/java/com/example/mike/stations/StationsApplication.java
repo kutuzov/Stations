@@ -18,7 +18,7 @@ public class StationsApplication extends Application {
     private int day,month,year;
     private String stDate,stFrom,stTo;
     private ArrayList<Response.Stations> stationsList, searchedStationsList;
-    private boolean currentDirection;
+    private boolean currentDirection,currentSearched;
     public boolean DIRECTION_FROM = true;
     public boolean DIRECTION_TO = false;
     Response response;
@@ -119,7 +119,8 @@ public class StationsApplication extends Application {
     }
 
     public ArrayList getStationsList(boolean searched, String searchQuery) {
-        collectStations();
+        currentSearched = searched;
+        if (! searched) collectStations();
         if (searched) { return doSearchStations(searchQuery);}
         return stationsList;
     }
@@ -173,5 +174,36 @@ public class StationsApplication extends Application {
 
     public void setCurrentDirection(boolean currentDirection) {
         this.currentDirection = currentDirection;
+    }
+
+    private Object getStation(int position) {
+        if (currentSearched) {
+            return searchedStationsList.get(position);
+        } else {
+            return stationsList.get(position);
+        }
+    }
+    public void setStation (int position) {
+        String title;
+
+        if (currentSearched) {
+            title = searchedStationsList.get(position).stationTitle;
+        } else {
+            title = stationsList.get(position).stationTitle;
+        }
+
+        if (currentDirection == DIRECTION_FROM) {
+            stFrom = title;
+        } else {
+            stTo = title;
+        }
+    }
+
+    public String getStFrom() {
+        return stFrom;
+    }
+
+    public String getStTo() {
+        return stTo;
     }
 }

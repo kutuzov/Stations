@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         StationsApplication stApp = (StationsApplication)getApplicationContext();
 
         tvDate.setText(stApp.getStDate());
+        if (stApp.getStFrom() != "") {tvFromStation.setText(stApp.getStFrom());}
+        if (stApp.getStTo() != "") {tvToStation.setText(stApp.getStTo());}
 
         btnFromStation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .setDuration(Snackbar.LENGTH_LONG)
                         .show();
-                StationsApplication stApp = (StationsApplication) getApplicationContext();
+                StationsApplication stApp = (StationsApplication)getApplicationContext();
                 stApp.setCurrentDirection(stApp.DIRECTION_FROM);
                 startSelectStationAsync();
             }
