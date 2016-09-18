@@ -17,8 +17,13 @@ import java.util.Comparator;
  */
 public class StationsApplication extends Application {
     private int day,month,year;
-    private String stDate;
+    private String stDate,stFrom,stTo;
     private ArrayList<Response.Stations> stationsFromList,searchedStationsFromList;
+    private boolean currentDirection;
+    public boolean DIRECTION_FROM = true;
+    public boolean DIRECTION_TO = false;
+    Response response;
+
 
     public StationsApplication() {
 
@@ -29,6 +34,9 @@ public class StationsApplication extends Application {
         day = cal.get(Calendar.DAY_OF_MONTH);
 
         generateDateString();
+
+        stFrom = "";
+        stTo = "";
 
     }
 
@@ -46,15 +54,24 @@ public class StationsApplication extends Application {
 
     private void collectFromStations() {
 
-        String jsonString = loadJSONFromAsset();
-        Gson gson = new Gson();
-        Response response = gson.fromJson(jsonString, Response.class);
+        if (response == null) {
+            String jsonString = loadJSONFromAsset();
+            Gson gson = new Gson();
+            response = gson.fromJson(jsonString, Response.class);
+        }
 
         stationsFromList = new ArrayList<Response.Stations>();
 
-        for (Response.CitiesFrom cf : response.citiesFrom) {
-            for (Response.Stations st : cf.stations)
-                stationsFromList.add(st);
+        if (currentDirection == DIRECTION_FROM) {
+            for (Response.CitiesFrom cf : response.citiesFrom) {
+                for (Response.Stations st : cf.stations)
+                    stationsFromList.add(st);
+            }
+        } else {
+            for (Response.CitiesFrom cf : response.citiesTo) {
+                for (Response.Stations st : cf.stations)
+                    stationsFromList.add(st);
+            }
         }
 
         Collections.sort(stationsFromList, new Comparator() {
@@ -150,5 +167,13 @@ public class StationsApplication extends Application {
     public String getStDate() {
         generateDateString();
         return stDate;
+    }
+
+    public boolean getCurrentDirection() {
+        return currentDirection;
+    }
+
+    public void setCurrentDirection(boolean currentDirection) {
+        this.currentDirection = currentDirection;
     }
 }

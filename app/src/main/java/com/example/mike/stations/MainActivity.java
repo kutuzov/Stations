@@ -82,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .setDuration(Snackbar.LENGTH_LONG)
                         .show();
-
+                StationsApplication stApp = (StationsApplication)getApplicationContext();
+                stApp.setCurrentDirection(stApp.DIRECTION_TO);
                 startSelectFromStationAsync();
             }
         });
