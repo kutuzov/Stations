@@ -1,8 +1,11 @@
 package com.example.mike.stations;
 
 
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public Toolbar toolbar;
     public String fromStation, toStation;
     public Date date;
+    public StationsApplication stApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +71,19 @@ public class MainActivity extends AppCompatActivity {
         btnFromStation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startSelectFromStation();
+                final View relativeLayoutView = findViewById(R.id.rl_main);
+
+               Snackbar
+                        .make(relativeLayoutView, R.string.loadHint, Snackbar.LENGTH_LONG)
+                        .setAction("OK", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                            }
+                        })
+                        .setDuration(Snackbar.LENGTH_LONG)
+                        .show();
+
+                startSelectFromStationAsync();
             }
         });
 
@@ -92,7 +108,29 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void startSelectFromStationAsync() {
+
+        class StartFromAsyncTask extends AsyncTask {
+            @Override
+            protected Object doInBackground(Object[] objects) {
+                StationsApplication stApp = (StationsApplication)getApplicationContext();
+                stApp.getStationsFromList(false, "");
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+                startSelectFromStation();
+            }
+        }
+
+        new StartFromAsyncTask().execute();
+
+    }
+
     public void startSelectToStation() {
+
         Intent intent = new Intent(this, SelectFromStationActivity.class);
         startActivity(intent);
     }
@@ -115,6 +153,10 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        if(id == R.id.action_settings) {
+
+        }
 
         return super.onOptionsItemSelected(item);
     }
