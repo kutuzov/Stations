@@ -1,7 +1,6 @@
 package com.example.mike.stations;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -18,7 +17,7 @@ import java.util.Comparator;
 public class StationsApplication extends Application {
     private int day,month,year;
     private String stDate,stFrom,stTo;
-    private ArrayList<Response.Stations> stationsFromList,searchedStationsFromList;
+    private ArrayList<Response.Stations> stationsList, searchedStationsList;
     private boolean currentDirection;
     public boolean DIRECTION_FROM = true;
     public boolean DIRECTION_TO = false;
@@ -52,7 +51,7 @@ public class StationsApplication extends Application {
         return strValue;
     }
 
-    private void collectFromStations() {
+    private void collectStations() {
 
         if (response == null) {
             String jsonString = loadJSONFromAsset();
@@ -60,21 +59,21 @@ public class StationsApplication extends Application {
             response = gson.fromJson(jsonString, Response.class);
         }
 
-        stationsFromList = new ArrayList<Response.Stations>();
+        stationsList = new ArrayList<Response.Stations>();
 
         if (currentDirection == DIRECTION_FROM) {
-            for (Response.CitiesFrom cf : response.citiesFrom) {
+            for (Response.Cities cf : response.citiesFrom) {
                 for (Response.Stations st : cf.stations)
-                    stationsFromList.add(st);
+                    stationsList.add(st);
             }
         } else {
-            for (Response.CitiesFrom cf : response.citiesTo) {
+            for (Response.Cities cf : response.citiesTo) {
                 for (Response.Stations st : cf.stations)
-                    stationsFromList.add(st);
+                    stationsList.add(st);
             }
         }
 
-        Collections.sort(stationsFromList, new Comparator() {
+        Collections.sort(stationsList, new Comparator() {
 
             public int compare(Object o1, Object o2) {
 
@@ -119,25 +118,24 @@ public class StationsApplication extends Application {
 
     }
 
-    public ArrayList getStationsFromList(boolean searched, String searchQuery) {
-        if (stationsFromList == null) {
-            collectFromStations();}
-        if (searched) { return doSearchFromStations(searchQuery);}
-        return stationsFromList;
+    public ArrayList getStationsList(boolean searched, String searchQuery) {
+        collectStations();
+        if (searched) { return doSearchStations(searchQuery);}
+        return stationsList;
     }
 
-    public ArrayList doSearchFromStations(String searchQuery) {
+    public ArrayList doSearchStations(String searchQuery) {
 
-        searchedStationsFromList = new ArrayList<Response.Stations>();
+        searchedStationsList = new ArrayList<Response.Stations>();
 
-        for (Response.Stations st : stationsFromList) {
+        for (Response.Stations st : stationsList) {
             if (st.countryTitle.toLowerCase().contains(searchQuery.toLowerCase()) ||
                     st.cityTitle.toLowerCase().contains(searchQuery.toLowerCase()) ||
                     st.stationTitle.toLowerCase().contains(searchQuery.toLowerCase()))
-                searchedStationsFromList.add(st);
+                searchedStationsList.add(st);
 
         }
-        return searchedStationsFromList;
+        return searchedStationsList;
     }
 
     public void setDay(int day) {

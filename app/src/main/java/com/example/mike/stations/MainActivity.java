@@ -1,26 +1,18 @@
 package com.example.mike.stations;
 
 
-import android.app.Activity;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -72,8 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final View relativeLayoutView = findViewById(R.id.rl_main);
-
-               Snackbar
+                Snackbar
                         .make(relativeLayoutView, R.string.loadHint, Snackbar.LENGTH_LONG)
                         .setAction("OK", new View.OnClickListener() {
                             @Override
@@ -82,16 +73,30 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .setDuration(Snackbar.LENGTH_LONG)
                         .show();
-                StationsApplication stApp = (StationsApplication)getApplicationContext();
-                stApp.setCurrentDirection(stApp.DIRECTION_TO);
-                startSelectFromStationAsync();
+                StationsApplication stApp = (StationsApplication) getApplicationContext();
+                stApp.setCurrentDirection(stApp.DIRECTION_FROM);
+                startSelectStationAsync();
             }
         });
 
         btnToStation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startSelectToStation();
+                final View relativeLayoutView = findViewById(R.id.rl_main);
+                Snackbar
+                        .make(relativeLayoutView, R.string.loadHint, Snackbar.LENGTH_LONG)
+                        .setAction("OK", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                            }
+                        })
+                        .setDuration(Snackbar.LENGTH_LONG)
+                        .show();
+                StationsApplication stApp = (StationsApplication) getApplicationContext();
+                stApp.setCurrentDirection(stApp.DIRECTION_TO);
+                startSelectStationAsync();
+
+
             }
         });
 
@@ -104,25 +109,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void startSelectFromStation() {
-        Intent intent = new Intent(this, SelectFromStationActivity.class);
+    public void startSelectStation() {
+        Intent intent = new Intent(this, SelectStationActivity.class);
         startActivity(intent);
     }
 
-    public void startSelectFromStationAsync() {
+    public void startSelectStationAsync() {
 
         class StartFromAsyncTask extends AsyncTask {
             @Override
             protected Object doInBackground(Object[] objects) {
                 StationsApplication stApp = (StationsApplication)getApplicationContext();
-                stApp.getStationsFromList(false, "");
+                stApp.getStationsList(false, "");
                 return null;
             }
 
             @Override
             protected void onPostExecute(Object o) {
                 super.onPostExecute(o);
-                startSelectFromStation();
+                startSelectStation();
             }
         }
 
@@ -130,11 +135,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void startSelectToStation() {
-
-        Intent intent = new Intent(this, SelectFromStationActivity.class);
-        startActivity(intent);
-    }
 
     public void startSelectDate() {
         Intent intent = new Intent(this, DatePickerActivity.class);
