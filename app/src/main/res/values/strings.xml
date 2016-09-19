@@ -12,9 +12,12 @@
     <string name="changeDateButtonText">Сохранить дату отправления</string>
     <string name="searchHint">Поиск станции...</string>
     <string name="loadHint">Загрузка станций...</string>
+    <string name="stationCardTitle">Информация о станции</string>
 
-
-
+    <string name="cityTitle">Город</string>
+    <string name="regionTitle">Регион</string>
+    <string name="countryTitle">Страна</string>
+    <string name="changeStationButtonText">Выбрать станцию</string>
 
 
     <!--<string name=""></string>-->

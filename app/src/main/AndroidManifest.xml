@@ -30,6 +30,7 @@
                 android:resource="@xml/searchable"/>
         </activity>
         <activity android:name=".DatePickerActivity"></activity>
+        <activity android:name=".ShowStationActivity"></activity>
 
 
     </application>

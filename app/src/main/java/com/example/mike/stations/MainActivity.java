@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         //TODO Add group by
         //TODO send choice back to MainActivity
 
-        //TODO Add "To" activity
         //TODO Add settings screen and inflate menu
 
 
@@ -59,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         StationsApplication stApp = (StationsApplication)getApplicationContext();
 
         tvDate.setText(stApp.getStDate());
+
         if (stApp.getStFrom() != "") {tvFromStation.setText(stApp.getStFrom());}
         if (stApp.getStTo() != "") {tvToStation.setText(stApp.getStTo());}
 
@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .setDuration(Snackbar.LENGTH_LONG)
                         .show();
+
                 StationsApplication stApp = (StationsApplication) getApplicationContext();
                 stApp.setCurrentDirection(stApp.DIRECTION_TO);
                 startSelectStationAsync();
@@ -139,7 +140,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void startSelectDate() {
-        Intent intent = new Intent(this, DatePickerActivity.class);
+//        Intent intent = new Intent(this, DatePickerActivity.class);
+        Intent intent = new Intent(this, ShowStationActivity.class);
+        startActivity(intent);
+    }
+
+    public void startShowStation() {
+        Intent intent = new Intent(this, ShowStationActivity.class);
         startActivity(intent);
     }
 
@@ -158,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.action_settings) {
-
+            startShowStation();
         }
 
         return super.onOptionsItemSelected(item);
