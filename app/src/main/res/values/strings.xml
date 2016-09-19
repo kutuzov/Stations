@@ -19,7 +19,10 @@
     <string name="countryTitle">Страна</string>
     <string name="changeStationButtonText">Выбрать станцию</string>
     <string name="textCity">город</string>
-
+    <string name="textAboutTitle">О приложении</string>
+    <string name="textAbout1">- Копирайт GNU General Public License v 3.0</string>
+    <string name="textAbout2">- Версия приложения 0.1</string>
+    <string name="textAbout3">Пожалуйста, сообщайте об ошибках и пожеланиях</string>
 
     <!--<string name=""></string>-->
 </resources>
