@@ -3,7 +3,6 @@ package com.example.mike.stations;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -167,9 +166,9 @@ public class MainActivity extends AppCompatActivity {
             String htmlB = "<b>";
             AlertDialog.Builder appInfo = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
             appInfo.setTitle((R.string.textAboutTitle));
-            String txt = getString(R.string.textAbout1) + htmlBr + getString(R.string.textAbout2)
+            String htmlText = getString(R.string.textAbout1) + htmlBr + getString(R.string.textAbout2)
                     + htmlBr + htmlBr + htmlB + getString(R.string.textAbout3);
-            appInfo.setMessage(Html.fromHtml(txt));
+            appInfo.setMessage(Html.fromHtml(htmlText));
 
             appInfo.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
