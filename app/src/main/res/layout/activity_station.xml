@@ -83,10 +83,17 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="8dp"
-                    android:text="International Busterminal, Edbergstarsse 200 A"
+                    android:text="Station"
                     android:textColor="@color/body_text_1"
-                    android:textSize="22sp" />
+                    android:textSize="25sp" />
 
+                    <TextView
+                        android:id="@+id/borderline0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_text"
+                        android:paddingTop="4dp"
+                        android:textSize="1sp" />
 
 
                 <TextView
@@ -106,7 +113,7 @@
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:textColor="@color/body_text_1"
-                    android:textSize="@dimen/text_size_xlarge" />
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/borderline"
@@ -135,7 +142,7 @@
                     android:paddingRight="8dp"
                     android:paddingTop="4dp"
                     android:textColor="@color/body_text_1"
-                    android:textSize="@dimen/text_size_xlarge" />
+                    android:textSize="22sp" />
 
                 <TextView
                     android:id="@+id/borderline1"
@@ -164,7 +171,7 @@
                     android:paddingRight="8dp"
                     android:paddingTop="4dp"
                     android:textColor="@color/body_text_1"
-                    android:textSize="@dimen/text_size_xlarge" />
+                    android:textSize="22sp" />
 
                     <Button
                         android:id="@+id/btnSelectStation"

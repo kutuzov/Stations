@@ -18,6 +18,7 @@
     <string name="regionTitle">Регион</string>
     <string name="countryTitle">Страна</string>
     <string name="changeStationButtonText">Выбрать станцию</string>
+    <string name="textCity">город</string>
 
 
     <!--<string name=""></string>-->

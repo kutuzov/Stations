@@ -2,16 +2,14 @@ package com.example.mike.stations;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.*;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,7 +35,7 @@ public class CardOverviewAdapter extends RecyclerView.Adapter<CardOverviewAdapte
             this.tvName = (TextView) itemView.findViewById(R.id.tvName);
             this.tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
 
-            this.cvCard = (LinearLayout) itemView.findViewById(R.id.daycard);
+            this.cvCard = (LinearLayout) itemView.findViewById(R.id.card);
         }
     }
 
@@ -73,20 +71,18 @@ public class CardOverviewAdapter extends RecyclerView.Adapter<CardOverviewAdapte
         holder.tvName.setText(countryAndCity);
         holder.tvDescription.setText(card.stationTitle);
 
-        holder.cvCard.setBackgroundColor(Color.LTGRAY);
+        holder.cvCard.setBackgroundColor(Color.parseColor("#BBDEFB"));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
-            Activity activity = (Activity) context;
-            StationsApplication stApp = (StationsApplication) context.getApplicationContext();
-            String str = stApp.getStDate();
-            stApp.setStation(position);
-            Toast.makeText(v.getContext(), "position = " + position, Toast.LENGTH_SHORT).show();
-
-
-
-        }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity activity = (Activity) context;
+                StationsApplication stApp = (StationsApplication) context.getApplicationContext();
+                String str = stApp.getStDate();
+                stApp.setStationCard(position);
+                Intent intent = new Intent(context, ShowStationActivity.class);
+                context.startActivity(intent);
+            }
         });
     }
 
@@ -102,6 +98,7 @@ public class CardOverviewAdapter extends RecyclerView.Adapter<CardOverviewAdapte
         Activity activity = (Activity) context;
     }
 
-    }
+
+}
 
 

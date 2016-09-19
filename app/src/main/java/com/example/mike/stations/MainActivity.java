@@ -140,13 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void startSelectDate() {
-//        Intent intent = new Intent(this, DatePickerActivity.class);
-        Intent intent = new Intent(this, ShowStationActivity.class);
-        startActivity(intent);
-    }
-
-    public void startShowStation() {
-        Intent intent = new Intent(this, ShowStationActivity.class);
+        Intent intent = new Intent(this, DatePickerActivity.class);
         startActivity(intent);
     }
 
@@ -165,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.action_settings) {
-            startShowStation();
         }
 
         return super.onOptionsItemSelected(item);

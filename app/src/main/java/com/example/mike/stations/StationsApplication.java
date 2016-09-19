@@ -21,8 +21,8 @@ public class StationsApplication extends Application {
     private boolean currentDirection,currentSearched;
     public boolean DIRECTION_FROM = true;
     public boolean DIRECTION_TO = false;
-    Response response;
-
+    private Response response;
+    private Response.Stations currentStation;
 
     public StationsApplication() {
 
@@ -183,20 +183,27 @@ public class StationsApplication extends Application {
             return stationsList.get(position);
         }
     }
-    public void setStation (int position) {
-        String title;
+    public void setStationCard(int position) {
 
         if (currentSearched) {
-            title = searchedStationsList.get(position).stationTitle;
+            currentStation = searchedStationsList.get(position);
         } else {
-            title = stationsList.get(position).stationTitle;
+            currentStation = stationsList.get(position);
         }
+
+    }
+
+    public void setStation() {
+        String title;
+
+        title = currentStation.stationTitle;
 
         if (currentDirection == DIRECTION_FROM) {
             stFrom = title;
         } else {
             stTo = title;
         }
+
     }
 
     public String getStFrom() {
@@ -206,4 +213,26 @@ public class StationsApplication extends Application {
     public String getStTo() {
         return stTo;
     }
+
+    public String getCurrentStationTitle() {
+        return currentStation.stationTitle;
+    }
+
+    public String getCurrentStationCity() {
+        String returnCity = currentStation.cityTitle;
+        String textCity = getString(R.string.textCity);
+        if (returnCity.toLowerCase().startsWith(textCity)){
+            returnCity = returnCity.substring(6,returnCity.length());
+        }
+        return returnCity;
+    }
+
+    public String getCurrentStationRegion() {
+        return currentStation.regionTitle;
+    }
+
+    public String getCurrentStationCountry() {
+        return currentStation.countryTitle;
+    }
+
 }
