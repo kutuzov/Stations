@@ -172,8 +172,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             appInfo.show();
+            return true;
         }
-
+        if(id == R.id.action_exit) {
+            this.finishAffinity();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
