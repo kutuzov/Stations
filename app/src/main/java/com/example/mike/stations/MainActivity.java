@@ -38,10 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //TODO Add group by
 
         //TODO Add settings screen and inflate menu
-
+        //TODO Cleanup
 
         setContentView(R.layout.activity_main);
         setupToolbar();
@@ -159,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if(id == R.id.action_settings) {
+        if(id == R.id.action_about) {
             String htmlBr = "<br/>";
             String htmlB = "<b>";
             AlertDialog.Builder appInfo = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);

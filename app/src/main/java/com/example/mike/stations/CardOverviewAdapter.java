@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,7 @@ public class CardOverviewAdapter extends RecyclerView.Adapter<CardOverviewAdapte
         public ViewHolder(View itemView) {
             super(itemView);
             this.tvName = (TextView) itemView.findViewById(R.id.tvName);
-            this.tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
+         //   this.tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
 
             this.cvCard = (LinearLayout) itemView.findViewById(R.id.card);
         }
@@ -66,24 +67,34 @@ public class CardOverviewAdapter extends RecyclerView.Adapter<CardOverviewAdapte
         // Get the data model based on position
         Response.Stations card = cards.get(position);
         // Set item views based on the data model
-        String countryAndCity = card.countryTitle+", "+card.cityTitle;
+        String countryAndCity = card.countryTitle + ", " + card.cityTitle;
 
-        holder.tvName.setText(countryAndCity);
-        holder.tvDescription.setText(card.stationTitle);
+        if ((card.stationTitle.equals("")) && (card.stationId == 0)) {
+            holder.tvName.setText(countryAndCity);
+            holder.tvName.setTextSize(16);
+          //  holder.tvDescription.setText(card.stationTitle);
 
-        holder.cvCard.setBackgroundColor(Color.parseColor("#BBDEFB"));
+            holder.cvCard.setBackgroundColor(ContextCompat.getColor(context, R.color.background_material_light));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Activity activity = (Activity) context;
-                StationsApplication stApp = (StationsApplication) context.getApplicationContext();
-                String str = stApp.getStDate();
-                stApp.setStationCard(position);
-                Intent intent = new Intent(context, ShowStationActivity.class);
-                context.startActivity(intent);
-            }
-        });
+        } else {
+
+           // holder.tvName.setText(countryAndCity);
+            holder.tvName.setText(card.stationTitle);
+
+            holder.cvCard.setBackgroundColor(Color.parseColor("#BBDEFB"));
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Activity activity = (Activity) context;
+                    StationsApplication stApp = (StationsApplication) context.getApplicationContext();
+                    String str = stApp.getStDate();
+                    stApp.setStationCard(position);
+                    Intent intent = new Intent(context, ShowStationActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+        }
     }
 
     // Return the total count of items

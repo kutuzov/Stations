@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
+
+import static com.example.mike.stations.Response.*;
 
 /**
  * Created by prolomov on 16.09.2016.
@@ -17,7 +20,8 @@ import java.util.Comparator;
 public class StationsApplication extends Application {
     private int day,month,year;
     private String stDate,stFrom,stTo;
-    private ArrayList<Response.Stations> stationsList, searchedStationsList;
+    private ArrayList<Response.Stations> stationsList, searchedStationsList,
+            stationsListGrouped,searchedStationsListGrouped;
     private boolean currentDirection,currentSearched;
     public boolean DIRECTION_FROM = true;
     public boolean DIRECTION_TO = false;
@@ -60,6 +64,7 @@ public class StationsApplication extends Application {
         }
 
         stationsList = new ArrayList<Response.Stations>();
+        stationsListGrouped = new ArrayList<Response.Stations>();
 
         if (currentDirection == DIRECTION_FROM) {
             for (Response.Cities cf : response.citiesFrom) {
@@ -90,6 +95,26 @@ public class StationsApplication extends Application {
                 }
             }
         });
+
+        String groupByArgument = "";
+        int i = 0;
+        Response response = new Response();
+        for (Iterator<Response.Stations> it = stationsList.iterator(); it.hasNext(); i++) {
+            Response.Stations loopStation = it.next();
+            String currentArgument = loopStation.countryTitle+", "+loopStation.cityTitle;
+            if (! currentArgument.equals(groupByArgument)) {
+                Response.Stations loopStationDivider = response.new Stations();
+                loopStationDivider.countryTitle=loopStation.countryTitle;
+                loopStationDivider.cityTitle=loopStation.cityTitle;
+                loopStationDivider.stationTitle = "";
+                loopStationDivider.stationId=0;
+                stationsListGrouped.add(loopStationDivider);
+                stationsListGrouped.add(loopStation);
+                groupByArgument = currentArgument;
+            } else {
+                stationsListGrouped.add(loopStation);
+            }
+        }
 
     }
 
@@ -122,12 +147,13 @@ public class StationsApplication extends Application {
         currentSearched = searched;
         if (! searched) collectStations();
         if (searched) { return doSearchStations(searchQuery);}
-        return stationsList;
+        return stationsListGrouped;
     }
 
     public ArrayList doSearchStations(String searchQuery) {
 
         searchedStationsList = new ArrayList<Response.Stations>();
+        searchedStationsListGrouped = new ArrayList<Response.Stations>();
 
         for (Response.Stations st : stationsList) {
             if (st.countryTitle.toLowerCase().contains(searchQuery.toLowerCase()) ||
@@ -136,7 +162,28 @@ public class StationsApplication extends Application {
                 searchedStationsList.add(st);
 
         }
-        return searchedStationsList;
+
+        String groupByArgument = "";
+        int i = 0;
+        Response response = new Response();
+        for (Iterator<Response.Stations> it = searchedStationsList.iterator(); it.hasNext(); i++) {
+            Response.Stations loopStation = it.next();
+            String currentArgument = loopStation.countryTitle+", "+loopStation.cityTitle;
+            if (! currentArgument.equals(groupByArgument)) {
+                Response.Stations loopStationDivider = response.new Stations();
+                loopStationDivider.countryTitle=loopStation.countryTitle;
+                loopStationDivider.cityTitle=loopStation.cityTitle;
+                loopStationDivider.stationTitle = "";
+                loopStationDivider.stationId=0;
+                searchedStationsListGrouped.add(loopStationDivider);
+                searchedStationsListGrouped.add(loopStation);
+                groupByArgument = currentArgument;
+            } else {
+                searchedStationsListGrouped.add(loopStation);
+            }
+        }
+
+        return searchedStationsListGrouped;
     }
 
     public void setDay(int day) {
@@ -178,17 +225,17 @@ public class StationsApplication extends Application {
 
     private Object getStation(int position) {
         if (currentSearched) {
-            return searchedStationsList.get(position);
+            return searchedStationsListGrouped.get(position);
         } else {
-            return stationsList.get(position);
+            return stationsListGrouped.get(position);
         }
     }
     public void setStationCard(int position) {
 
         if (currentSearched) {
-            currentStation = searchedStationsList.get(position);
+            currentStation = searchedStationsListGrouped.get(position);
         } else {
-            currentStation = stationsList.get(position);
+            currentStation = stationsListGrouped.get(position);
         }
 
     }

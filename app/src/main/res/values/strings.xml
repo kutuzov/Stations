@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Расписание</string>
-    <string name="action_settings">О приложении</string>
+    <string name="action_about">О приложении</string>
+    <string name="action_exit">Выход</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="stationFromText">Станция отправления:</string>
     <string name="stationFromButtonText">Выбрать станцию отправления</string>stationFromButtonText

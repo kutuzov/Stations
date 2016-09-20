@@ -35,6 +35,7 @@ public class Response {
         public String regionTitle;
         public int stationId;
         public String stationTitle;
+
     }
 }
 
