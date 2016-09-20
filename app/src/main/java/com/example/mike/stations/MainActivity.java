@@ -37,10 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setTheme(theme);
 
 
-        //TODO Add detailed view activity
-        //TODO Add choice - look option
+
         //TODO Add group by
-        //TODO send choice back to MainActivity
 
         //TODO Add settings screen and inflate menu
 
