@@ -23,28 +23,18 @@ public class MainActivity extends AppCompatActivity {
 
     public int theme;
     public Toolbar toolbar;
-    public String fromStation, toStation;
     public Date date;
-    public StationsApplication stApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-
         theme = R.style.MyMaterialTheme;
         setTheme(theme);
 
-
-
-
-        //TODO Add settings screen and inflate menu
-        //TODO Cleanup
-
         setContentView(R.layout.activity_main);
         setupToolbar();
-//        setToolbarBackIcon();
 
         TextView tvFromStation = (TextView) findViewById(R.id.tvFromStation);
         Button btnFromStation = (Button) findViewById(R.id.btnFromStation);
@@ -55,12 +45,16 @@ public class MainActivity extends AppCompatActivity {
         TextView tvDate = (TextView) findViewById(R.id.tvDate);
         Button btnDate = (Button) findViewById(R.id.btnDate);
 
-        StationsApplication stApp = (StationsApplication)getApplicationContext();
+        StationsApplication stApp = (StationsApplication) getApplicationContext();
 
         tvDate.setText(stApp.getStDate());
 
-        if (stApp.getStFrom() != "") {tvFromStation.setText(stApp.getStFrom());}
-        if (stApp.getStTo() != "") {tvToStation.setText(stApp.getStTo());}
+        if (stApp.getStFrom() != "") {
+            tvFromStation.setText(stApp.getStFrom());
+        }
+        if (stApp.getStTo() != "") {
+            tvToStation.setText(stApp.getStTo());
+        }
 
         btnFromStation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .setDuration(Snackbar.LENGTH_LONG)
                         .show();
-                StationsApplication stApp = (StationsApplication)getApplicationContext();
+                StationsApplication stApp = (StationsApplication) getApplicationContext();
                 stApp.setCurrentDirection(stApp.DIRECTION_FROM);
                 startSelectStationAsync();
             }
@@ -112,17 +106,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void startSelectStation() {
-        Intent intent = new Intent(this, SelectStationActivity.class);
-        startActivity(intent);
-    }
 
+    //We load data async for user-friendly interface
     public void startSelectStationAsync() {
 
         class StartFromAsyncTask extends AsyncTask {
             @Override
             protected Object doInBackground(Object[] objects) {
-                StationsApplication stApp = (StationsApplication)getApplicationContext();
+                StationsApplication stApp = (StationsApplication) getApplicationContext();
                 stApp.getStationsList(false, "");
                 return null;
             }
@@ -138,6 +129,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void startSelectStation() {
+        Intent intent = new Intent(this, SelectStationActivity.class);
+        startActivity(intent);
+    }
 
     public void startSelectDate() {
         Intent intent = new Intent(this, DatePickerActivity.class);
@@ -153,12 +148,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // Handle action bar item clicks here.
         int id = item.getItemId();
 
-        if(id == R.id.action_about) {
+        if (id == R.id.action_about) {
             String htmlBr = "<br/>";
             String htmlB = "<b>";
             AlertDialog.Builder appInfo = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
@@ -174,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
             appInfo.show();
             return true;
         }
-        if(id == R.id.action_exit) {
+        if (id == R.id.action_exit) {
             this.finishAffinity();
             return true;
         }
@@ -182,13 +175,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void setupToolbar(){
+    public void setupToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
-
-
-
 
 
 }

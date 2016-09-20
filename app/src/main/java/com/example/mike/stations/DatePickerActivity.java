@@ -27,7 +27,6 @@ public class DatePickerActivity extends AppCompatActivity {
     public Toolbar toolbar;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +41,9 @@ public class DatePickerActivity extends AppCompatActivity {
         final DatePicker dpDate = (DatePicker) findViewById(R.id.dpDate);
         Button btnChangeDate = (Button) findViewById(R.id.btnChangeDate);
 
-        final StationsApplication stApp = (StationsApplication)getApplicationContext();
+        final StationsApplication stApp = (StationsApplication) getApplicationContext();
 
-        dpDate.init(stApp.getYear(), stApp.getMonth()-1, stApp.getDay(), null);
+        dpDate.init(stApp.getYear(), stApp.getMonth() - 1, stApp.getDay(), null);
 
         btnChangeDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +56,6 @@ public class DatePickerActivity extends AppCompatActivity {
         });
 
     }
-
 
 
     @Override
@@ -73,7 +71,7 @@ public class DatePickerActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if(id == R.id.action_about) {
+        if (id == R.id.action_about) {
             String htmlBr = "<br/>";
             String htmlB = "<b>";
             AlertDialog.Builder appInfo = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
@@ -89,7 +87,7 @@ public class DatePickerActivity extends AppCompatActivity {
             appInfo.show();
             return true;
         }
-        if(id == R.id.action_exit) {
+        if (id == R.id.action_exit) {
             this.finishAffinity();
             return true;
         }
@@ -97,12 +95,12 @@ public class DatePickerActivity extends AppCompatActivity {
     }
 
 
-    public void setupToolbar(){
+    public void setupToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
-    public void setToolbarBackIcon(){
+    public void setToolbarBackIcon() {
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

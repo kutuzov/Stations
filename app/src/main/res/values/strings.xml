@@ -3,9 +3,9 @@
     <string name="action_about">О приложении</string>
     <string name="action_exit">Выход</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
-    <string name="stationFromText">Станция отправления:</string>
+    <string name="stationFromText">Станция отправления</string>
     <string name="stationFromButtonText">Выбрать станцию отправления</string>stationFromButtonText
-    <string name="stationToText">Станция прибытия:</string>
+    <string name="stationToText">Станция прибытия</string>
     <string name="stationToButtonText">Выбрать станцию прибытия</string>
     <string name="dateText">Дата отправления:</string>
     <string name="dateButtonText">Выбрать дату отправления</string>

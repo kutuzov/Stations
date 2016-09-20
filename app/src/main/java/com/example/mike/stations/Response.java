@@ -9,7 +9,6 @@ public class Response {
     public List<Cities> citiesFrom;
     public List<Cities> citiesTo;
 
-//    public ArrayList<Cities> citiesFormList = new ArrayList<Cities>();
 
     public class Cities {
         public String countryTitle;

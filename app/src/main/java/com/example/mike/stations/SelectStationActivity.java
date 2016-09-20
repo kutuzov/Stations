@@ -48,7 +48,7 @@ public class SelectStationActivity extends AppCompatActivity {
         setupToolbar();
         setToolbarBackIcon();
 
-        StationsApplication stApp = (StationsApplication)getApplicationContext();
+        StationsApplication stApp = (StationsApplication) getApplicationContext();
         stationsList = stApp.getStationsList(searched, searchQuery);
 
         CardOverviewAdapter adapter;
@@ -63,12 +63,12 @@ public class SelectStationActivity extends AppCompatActivity {
         return stationsList;
     }
 
-    public void setupToolbar(){
+    public void setupToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
-    public void setToolbarBackIcon(){
+    public void setToolbarBackIcon() {
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,13 +86,13 @@ public class SelectStationActivity extends AppCompatActivity {
 
         SearchManager searchManager = (SearchManager) SelectStationActivity.this.getSystemService(Context.SEARCH_SERVICE);
 
-       SearchView searchView = null;
+        SearchView searchView = null;
         if (searchItem != null) {
             searchView = (SearchView) searchItem.getActionView();
         }
         if (searchView != null) {
             searchView.setSearchableInfo(searchManager.getSearchableInfo(SelectStationActivity.this.getComponentName()));
-            }
+        }
 
         return true;
     }
@@ -104,7 +104,7 @@ public class SelectStationActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if(id == R.id.action_about) {
+        if (id == R.id.action_about) {
             String htmlBr = "<br/>";
             String htmlB = "<b>";
             AlertDialog.Builder appInfo = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
@@ -120,7 +120,7 @@ public class SelectStationActivity extends AppCompatActivity {
             appInfo.show();
             return true;
         }
-        if(id == R.id.action_exit) {
+        if (id == R.id.action_exit) {
             this.finishAffinity();
             return true;
         }

@@ -26,16 +26,13 @@ public class CardOverviewAdapter extends RecyclerView.Adapter<CardOverviewAdapte
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public TextView tvName;
-        public TextView tvDescription;
-
         public LinearLayout cvCard;
+
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder(View itemView) {
             super(itemView);
             this.tvName = (TextView) itemView.findViewById(R.id.tvName);
-         //   this.tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
-
             this.cvCard = (LinearLayout) itemView.findViewById(R.id.card);
         }
     }
@@ -72,13 +69,10 @@ public class CardOverviewAdapter extends RecyclerView.Adapter<CardOverviewAdapte
         if ((card.stationTitle.equals("")) && (card.stationId == 0)) {
             holder.tvName.setText(countryAndCity);
             holder.tvName.setTextSize(16);
-          //  holder.tvDescription.setText(card.stationTitle);
-
             holder.cvCard.setBackgroundColor(ContextCompat.getColor(context, R.color.background_material_light));
 
         } else {
 
-           // holder.tvName.setText(countryAndCity);
             holder.tvName.setText(card.stationTitle);
 
             holder.cvCard.setBackgroundColor(Color.parseColor("#BBDEFB"));
@@ -86,9 +80,7 @@ public class CardOverviewAdapter extends RecyclerView.Adapter<CardOverviewAdapte
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Activity activity = (Activity) context;
                     StationsApplication stApp = (StationsApplication) context.getApplicationContext();
-                    String str = stApp.getStDate();
                     stApp.setStationCard(position);
                     Intent intent = new Intent(context, ShowStationActivity.class);
                     context.startActivity(intent);

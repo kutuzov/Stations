@@ -11,18 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 /**
  * Created by prolomov on 19.09.2016.
  */
-public class ShowStationActivity extends AppCompatActivity{
+public class ShowStationActivity extends AppCompatActivity {
     public int theme;
     public Toolbar toolbar;
-
 
 
     @Override
@@ -35,30 +31,16 @@ public class ShowStationActivity extends AppCompatActivity{
         setupToolbar();
         setToolbarBackIcon();
 
-/*
-       // ErrorLayout = (LinearLayout) findViewById(R.id.error);
-        ScrollView sv = (ScrollView) findViewById(R.id.scroll_view);
-        */
-/**
-         * Removing ugly overscroll effect
-         * Setting ScrollView's & ErrorLayout's visibility to gone
-         *//*
+        TextView tvStation = (TextView) findViewById(R.id.stationTitle);
+        TextView tvCity = (TextView) findViewById(R.id.city);
+        TextView tvRegion = (TextView) findViewById(R.id.region);
+        TextView tvCountry = (TextView) findViewById(R.id.country);
+        Button btnSelectStation = (Button) findViewById(R.id.btnSelectStation);
 
-
-       sv.setOverScrollMode(View.OVER_SCROLL_NEVER);
-//        sv.setVisibility(View.GONE);
-//        ErrorLayout.setVisibility(View.GONE);
-*/
-        TextView tvStation = (TextView)findViewById(R.id.stationTitle);
-        TextView tvCity = (TextView)findViewById(R.id.city);
-        TextView tvRegion = (TextView)findViewById(R.id.region);
-        TextView tvCountry = (TextView)findViewById(R.id.country);
-        Button btnSelectStation = (Button)findViewById(R.id.btnSelectStation);
-
-        final StationsApplication stApp = (StationsApplication)getApplicationContext();
+        final StationsApplication stApp = (StationsApplication) getApplicationContext();
 
         tvStation.setText(stApp.getCurrentStationTitle());
-        tvCity.setText(stApp.getCurrentStationCity());
+        tvCity.setText(stApp.getCurrentStationCityForForm());
         tvRegion.setText(stApp.getCurrentStationRegion());
         tvCountry.setText(stApp.getCurrentStationCountry());
 
@@ -71,7 +53,6 @@ public class ShowStationActivity extends AppCompatActivity{
         });
 
     }
-
 
 
     @Override
@@ -87,7 +68,7 @@ public class ShowStationActivity extends AppCompatActivity{
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if(id == R.id.action_about) {
+        if (id == R.id.action_about) {
             String htmlBr = "<br/>";
             String htmlB = "<b>";
             AlertDialog.Builder appInfo = new AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
@@ -103,7 +84,7 @@ public class ShowStationActivity extends AppCompatActivity{
             appInfo.show();
             return true;
         }
-        if(id == R.id.action_exit) {
+        if (id == R.id.action_exit) {
             this.finishAffinity();
             return true;
         }
@@ -111,12 +92,12 @@ public class ShowStationActivity extends AppCompatActivity{
     }
 
 
-    public void setupToolbar(){
+    public void setupToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
-    public void setToolbarBackIcon(){
+    public void setToolbarBackIcon() {
         toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

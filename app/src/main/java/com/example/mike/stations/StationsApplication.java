@@ -12,17 +12,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 
-import static com.example.mike.stations.Response.*;
 
 /**
  * Created by prolomov on 16.09.2016.
  */
 public class StationsApplication extends Application {
-    private int day,month,year;
-    private String stDate,stFrom,stTo;
+    private int day, month, year;
+    private String stDate, stFrom, stTo;
     private ArrayList<Response.Stations> stationsList, searchedStationsList,
-            stationsListGrouped,searchedStationsListGrouped;
-    private boolean currentDirection,currentSearched;
+            stationsListGrouped, searchedStationsListGrouped;
+    private boolean currentDirection, currentSearched;
     public boolean DIRECTION_FROM = true;
     public boolean DIRECTION_TO = false;
     private Response response;
@@ -33,7 +32,7 @@ public class StationsApplication extends Application {
         Calendar cal = Calendar.getInstance();
 
         year = cal.get(Calendar.YEAR);
-        month = cal.get(Calendar.MONTH)+1;
+        month = cal.get(Calendar.MONTH) + 1;
         day = cal.get(Calendar.DAY_OF_MONTH);
 
         generateDateString();
@@ -44,19 +43,21 @@ public class StationsApplication extends Application {
     }
 
     private void generateDateString() {
-        stDate = generateStringWithLeadingZero(day)+"."+generateStringWithLeadingZero(month)+"."+year;
+        stDate = generateStringWithLeadingZero(day) + "." + generateStringWithLeadingZero(month) + "." + year;
     }
 
     private String generateStringWithLeadingZero(Integer intValue) {
         String strValue = intValue.toString();
         if (strValue.length() == 1) {
-            strValue = "0"+strValue;
+            strValue = "0" + strValue;
         }
         return strValue;
     }
 
+    //We collect stations every time basic view(not search) is accessed
     private void collectStations() {
 
+        //No need to load from JSON every time
         if (response == null) {
             String jsonString = loadJSONFromAsset();
             Gson gson = new Gson();
@@ -101,13 +102,13 @@ public class StationsApplication extends Application {
         Response response = new Response();
         for (Iterator<Response.Stations> it = stationsList.iterator(); it.hasNext(); i++) {
             Response.Stations loopStation = it.next();
-            String currentArgument = loopStation.countryTitle+", "+loopStation.cityTitle;
-            if (! currentArgument.equals(groupByArgument)) {
+            String currentArgument = loopStation.countryTitle + ", " + loopStation.cityTitle;
+            if (!currentArgument.equals(groupByArgument)) {
                 Response.Stations loopStationDivider = response.new Stations();
-                loopStationDivider.countryTitle=loopStation.countryTitle;
-                loopStationDivider.cityTitle=loopStation.cityTitle;
+                loopStationDivider.countryTitle = loopStation.countryTitle;
+                loopStationDivider.cityTitle = loopStation.cityTitle;
                 loopStationDivider.stationTitle = "";
-                loopStationDivider.stationId=0;
+                loopStationDivider.stationId = 0;
                 stationsListGrouped.add(loopStationDivider);
                 stationsListGrouped.add(loopStation);
                 groupByArgument = currentArgument;
@@ -145,8 +146,10 @@ public class StationsApplication extends Application {
 
     public ArrayList getStationsList(boolean searched, String searchQuery) {
         currentSearched = searched;
-        if (! searched) collectStations();
-        if (searched) { return doSearchStations(searchQuery);}
+        if (!searched) collectStations();
+        if (searched) {
+            return doSearchStations(searchQuery);
+        }
         return stationsListGrouped;
     }
 
@@ -168,13 +171,13 @@ public class StationsApplication extends Application {
         Response response = new Response();
         for (Iterator<Response.Stations> it = searchedStationsList.iterator(); it.hasNext(); i++) {
             Response.Stations loopStation = it.next();
-            String currentArgument = loopStation.countryTitle+", "+loopStation.cityTitle;
-            if (! currentArgument.equals(groupByArgument)) {
+            String currentArgument = loopStation.countryTitle + ", " + loopStation.cityTitle;
+            if (!currentArgument.equals(groupByArgument)) {
                 Response.Stations loopStationDivider = response.new Stations();
-                loopStationDivider.countryTitle=loopStation.countryTitle;
-                loopStationDivider.cityTitle=loopStation.cityTitle;
+                loopStationDivider.countryTitle = loopStation.countryTitle;
+                loopStationDivider.cityTitle = loopStation.cityTitle;
                 loopStationDivider.stationTitle = "";
-                loopStationDivider.stationId=0;
+                loopStationDivider.stationId = 0;
                 searchedStationsListGrouped.add(loopStationDivider);
                 searchedStationsListGrouped.add(loopStation);
                 groupByArgument = currentArgument;
@@ -230,6 +233,7 @@ public class StationsApplication extends Application {
             return stationsListGrouped.get(position);
         }
     }
+
     public void setStationCard(int position) {
 
         if (currentSearched) {
@@ -265,13 +269,20 @@ public class StationsApplication extends Application {
         return currentStation.stationTitle;
     }
 
-    public String getCurrentStationCity() {
+    //Here we modify getter because we already have word city written on form
+    //This is special getter used only for form inflating
+    public String getCurrentStationCityForForm() {
         String returnCity = currentStation.cityTitle;
         String textCity = getString(R.string.textCity);
-        if (returnCity.toLowerCase().startsWith(textCity)){
-            returnCity = returnCity.substring(6,returnCity.length());
+        if (returnCity.toLowerCase().startsWith(textCity)) {
+            returnCity = returnCity.substring(6, returnCity.length());
         }
         return returnCity;
+    }
+
+    //Standard getter
+    public String getCurrentStationCity() {
+        return currentStation.cityTitle;
     }
 
     public String getCurrentStationRegion() {
